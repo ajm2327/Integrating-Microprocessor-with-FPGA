@@ -14,8 +14,8 @@ module ac(input logic signed [7:0] Z,
 
 always_ff @(posedge clk)
 
-	if(LOAD_AC) AC <= Z; //idk I'm trying to do active high for LOAD_AC and there is no reset
-	//else AC <= 0;
+	if(LOAD_AC) AC <= Z; //if the Load ac bit goes high, then AC gets Z
+	//else AC <= 0; <- This line is commented out because in future modules it'll force AC to zero when it shouldn't
 	
 
 endmodule 
