@@ -6,14 +6,16 @@
 //**************************************************************************************
 
 //module declaration
-
+//The ALU is  necessary for interpreting opcodes
 module alu(input logic signed [7:0] mdr, ac, value, pc, addr,
 				input logic [7:0] opcode,
 				output logic nflg, zflg,
 				output logic signed [7:0] zout);
-				
+		//Negative flag		
 		assign nflg = ac[7];
+		//Zero flag
 		assign zflg = (ac==0)?1:0;
+		//Decoder for opcodes 00 through 10
 		always_comb
 			case(opcode)
 			8'h01: zout = mdr;
@@ -30,7 +32,8 @@ module alu(input logic signed [7:0] mdr, ac, value, pc, addr,
 			8'h0D: zout = ac ^ mdr;
 			8'h0E: zout = ac << value[2:0];
 			8'h0F: zout = ac >> value[2:0];
-			8'h10: zout = pc <= addr;
+			8'h10: zout = pc <= addr; //Should not be part of the ALU, but functions properly.
+//PC and address should not be part of the AlU module, all of the jump opcodes (10-14) will implemented in the control unit.
 			//8'h11: if(ac[7]) pc <= addr;
 			//8'h12: if(ac >= 0) pc <= addr;
 			//8'h13: if(zflg) pc <= addr;
