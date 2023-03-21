@@ -13,11 +13,12 @@ module ir(input logic [7:0] MDR,
 //always block, active high reset	
 		always_ff @(posedge clk, posedge reset)
 	
-			if (reset) begin
+			if (reset) begin //If reset both Opcode(IRU) and Value(IRL) get zero
 				IRU <= 0;
 				IRL <= 0;
 				end
-			else if (LOAD_IRU & ~LOAD_IRL) IRU <= MDR;// having the ~ means that it only works when one is on.
-			else if (LOAD_IRL & ~LOAD_IRU) IRL <= MDR;// this is so there doesn't have to be another if statement for both being on.
+			//Either LOAD_IRU or LOAD_IRL can be on, both cannot be on at the same time
+			else if (LOAD_IRU & ~LOAD_IRL) IRU <= MDR; // Opcode (IRU) gets the value stored in MDR
+			else if (LOAD_IRL & ~LOAD_IRU) IRL <= MDR; // Value (IRL) gets the value from MDR
 						
 endmodule
