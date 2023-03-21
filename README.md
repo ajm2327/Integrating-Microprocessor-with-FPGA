@@ -6,6 +6,7 @@ Below is the table of values for the decoder along with a diagram of how the dec
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/72291395/226743240-0a694c8b-6d79-4fce-bfae-cabe34ee971b.png">
 <img width="359" alt="image" src="https://user-images.githubusercontent.com/72291395/226744507-ae9b4040-27a3-4517-b4f2-aa0efd588246.png">  
 The dualseg7 display modules are the main component and important to have working correctly in order for the rest of the modules to correctly display their outputs. The 7 segment displays are active low which is why the table and the decoder use zeros to turn on each segment. The diagram above has the bits flipped and is an example for an active high decoder.  
-
+  
+The next modules for implementing the microprocessor are the registers: Accumulator, Instruction Register, and Program Counter, the files included above for each register are ac.sv, ir.sv, and pc.sv respectively. The Program Counter is used to hold the memory address of the current/next instruction, the Accumulator holds values (operands) from the ALU for performing operations, and the Instruction Register holds current instructions fetched from memory. 
 
 
