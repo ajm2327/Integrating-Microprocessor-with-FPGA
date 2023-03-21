@@ -19,13 +19,13 @@ module control (input logic clk, reset, nflg, zflg,
 		//State Register 1:
 		
 		always_ff @(negedge clk, posedge reset) //async reset
-			if(reset) state <= start;
-			else state <= next_state;
+			if(reset) state <= start; //Go to start state at reset
+			else state <= next_state; //Else get next state
 			 
 			
 			
 		//Next state (comb logic) 2:
-		
+		//There are 5 classes of opcodes that have unique fetch execute cycles, below each cycle is defined based on each set of opcodes:
 		always_comb
 			if (opcode == 8'h04 || opcode == 8'h00) begin //Class 1 case
 				case (state) //noOP or CLR
@@ -60,9 +60,9 @@ module control (input logic clk, reset, nflg, zflg,
 				default: next_state = start;
 				endcase
 			end
-			
+			//The class 5 jump opcodes each have unique parameters and cannot be together in the same cycle
 			else if (opcode == 8'h10) begin //class 5
-				case (state) //jump (i havent added the rest of the jump opcodes (for now) since they wont be simulated
+				case (state) //jump
 				start: next_state = prepu;
 				prepu: next_state = fetchu;
 				fetchu: next_state = prepl;
@@ -123,5 +123,4 @@ module control (input logic clk, reset, nflg, zflg,
 endmodule
 		//This  module is the brain of a computer. 
 		//Interprets opcode and arranges execution by instruction. 
-		//I'm not sure what this module is actually for. 
 			
