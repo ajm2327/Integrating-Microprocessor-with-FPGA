@@ -1,4 +1,6 @@
 # Integrating-Microprocessor-with-FPGA
+This repository is for the purpose of building a portfolio. Use of these files for school assignments is plagiarism and academically dishonest.  
+
 This is a class project which contains my code files which work together to implement a microprocessor using the Intel DE0-CV FPGA board  
 The first building block in implementing the microprocessor is setting up the display, the first file is seg7.sv which is a decoder that contains an always_comb block of hexidecimal numbers 0 through F. The decoder converts binary values into hexadecimal.    
 Dual_seg7.sv calls the seg7 module twice because on the DE0-CV FPGA board there are 6 separate hex displays which are divided into three pairs to have a "one's" place and a "sixteen's" place. The dualseg7_tb.sv file is the testbench which calls dual_seg7 three times in order to create three pairs of hex displays.  
@@ -25,4 +27,11 @@ up3.sv is the module which calls to the previous modules: ramlpm, alu, ac, ir, a
 
 the up3_cu.sv file wraps both up3.sv and control.sv together, the up3cu_tb.sv file is the test bench file which demonstrates this step in the process, in order for the fpga to demonstrate the program, it needs a mif file which contains the opcodes and address/values that the fpga will perform.  
 The final product uses the files up3Final.sv and up3tbFinal.sv which fully demonstrates a microprocessor. The testbench for the FPGA hardware includes a mode select function using a push button on account of the FPGA board not being capable of displaying every single output, the commented file shows how the mode select functions and which values are displayed in each mode.  
-To demonstrate the FPGA board, a mif file is required, a sample mif file up3.mif is included which was a project to demonstrate the state machine with fully functioning jump opcodes.
+  
+To demonstrate the FPGA board, a mif file is required, a sample mif file up3.mif is included which was a project to demonstrate the state machine with fully functioning jump opcodes.  
+Below is a table explaining the mif file which contains the machine code for calculating the area of a triangle:  
+<img width="403" alt="image" src="https://user-images.githubusercontent.com/72291395/226770404-a981bc31-a066-4092-804f-27dcce913459.png">  
+Additionally this is how the mif file appears when viewed in Quartus:  
+<img width="176" alt="image" src="https://user-images.githubusercontent.com/72291395/226770563-b60fadc0-6ce4-44aa-b033-7ead2d652314.png">  
+Address F0, F1, and F5 are used as constants to store the values used for calculation.  
+This processor is big endian, so the higher bite contains the opcode, and the lower bite contains the argument that the operation is performed on. 
