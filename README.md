@@ -30,6 +30,8 @@ The final product uses the files up3Final.sv and up3tbFinal.sv which fully demon
   
 To demonstrate the FPGA board, a mif file is required, a sample mif file up3.mif is included which was a project to demonstrate the state machine with fully functioning jump opcodes.  
 Below is a table explaining the mif file which contains the machine code for calculating the area of a triangle:  
+F0 contains operand A (base); F1 contains operand B (height); F2 = copy of A; F3 = copy of B; F4 contains the result; F5 contains constant 01;  
+
 <img width="403" alt="image" src="https://user-images.githubusercontent.com/72291395/226770404-a981bc31-a066-4092-804f-27dcce913459.png">  
 Additionally this is how the mif file appears when viewed in Quartus:  
 <img width="176" alt="image" src="https://user-images.githubusercontent.com/72291395/226770563-b60fadc0-6ce4-44aa-b033-7ead2d652314.png">  
