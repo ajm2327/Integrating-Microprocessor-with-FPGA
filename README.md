@@ -14,8 +14,15 @@ The Arithmetic Logic Unit is necessary to interpret opcodes from the MDR and uti
 <img width="290" alt="image" src="https://user-images.githubusercontent.com/72291395/226756791-bacd09f1-f8f3-43f5-8e02-3dedfdb04d5a.png">  
 Additionally this is a diagram of how the AC and IR are integrated with the ALU in order to perform operations based on Opcodes. My ALU.sv module listed above also integrated the PC module but is not accurate to the actual structure of the Arithmetic Logic Unit.  
 <img width="277" alt="image" src="https://user-images.githubusercontent.com/72291395/226757159-542f4c81-8154-49e6-98ed-1d69ef754354.png">  
-In my alu.sv file there are comments where PC and address were added to the module in order to perform the jump opcode, but the ALU is incapable of actually performing the jump opcodes.
+In my alu.sv file there are comments where PC and address were added to the module in order to perform the jump opcode, but the ALU is incapable of actually performing the jump opcodes.  
+The ramlpm.v and ramlpm_tb.sv files are for initializing and demonstrating ram/memory on the FPGA board, this was done following a tutorial in Quartus using the megafunction wizard tool. The microprocessor will utilize a .mif (memory initialization file) which will contain the opcodes to perform basic operations. Initializing ram on the FPGA board is necessary in order for the FPGA board to "read" the mif file.  
+  
+The next module is the control unit which will create the fetch-execute cycle. Below is a table showing the flow of the control unit:    
+<img width="484" alt="image" src="https://user-images.githubusercontent.com/72291395/226760921-955ed913-5a28-4f77-be16-251c18cd72c4.png">  
+<img width="487" alt="image" src="https://user-images.githubusercontent.com/72291395/226761031-8605edfe-a52d-4220-b9f3-368e8b23dff5.png">  
 
+up3.sv is the module which calls to the previous modules: ramlpm, alu, ac, ir, and pc. The module control.sv is the state machine which implements the flow of the control unit shown in the table above, this module identifies each opcode by class and arranges the execution based on those opcodes. The comments in the control.sv file shows what opcodes are part of each class and their following cycle. 
 
-
-
+the up3_cu.sv file wraps both up3.sv and control.sv together, the up3cu_tb.sv file is the test bench file which demonstrates this step in the process, in order for the fpga to demonstrate the program, it needs a mif file which contains the opcodes and address/values that the fpga will perform.  
+The final product uses the files up3Final.sv and up3tbFinal.sv which fully demonstrates a microprocessor. The testbench for the FPGA hardware includes a mode select function using a push button on account of the FPGA board not being capable of displaying every single output, the commented file shows how the mode select functions and which values are displayed in each mode.  
+To demonstrate the FPGA board, a mif file is required, a sample mif file up3.mif is included which was a project to demonstrate the state machine with fully functioning jump opcodes.
